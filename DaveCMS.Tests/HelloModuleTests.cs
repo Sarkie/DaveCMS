@@ -10,7 +10,7 @@ namespace DaveCMS.Tests
         public void Should_return_status_ok_when_route_exists()
         {
             // Given
-            var bootstrapper = new DefaultNancyBootstrapper();
+            var bootstrapper = new CustomBootstrapper();
             var browser = new Browser(bootstrapper);
 
             // When

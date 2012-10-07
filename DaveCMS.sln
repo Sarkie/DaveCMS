@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaveCMS", "DaveCMS\DaveCMS.csproj", "{29CAAED9-5617-4AF4-9422-F398F1DE2CE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaveCMS.Tests", "DaveCMS.Tests\DaveCMS.Tests.csproj", "{7F5B8A18-0842-4C96-8FFF-5D9501953748}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{29CAAED9-5617-4AF4-9422-F398F1DE2CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CAAED9-5617-4AF4-9422-F398F1DE2CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CAAED9-5617-4AF4-9422-F398F1DE2CE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5B8A18-0842-4C96-8FFF-5D9501953748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5B8A18-0842-4C96-8FFF-5D9501953748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5B8A18-0842-4C96-8FFF-5D9501953748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5B8A18-0842-4C96-8FFF-5D9501953748}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

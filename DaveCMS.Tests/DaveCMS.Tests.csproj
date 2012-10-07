@@ -53,10 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelloModuleTests.cs" />
+    <Compile Include="Modules\CMSModuleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DaveCMS\DaveCMS.csproj">
+      <Project>{29CAAED9-5617-4AF4-9422-F398F1DE2CE3}</Project>
+      <Name>DaveCMS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
