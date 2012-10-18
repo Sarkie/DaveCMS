@@ -17,16 +17,25 @@ namespace DaveCMS.Modules
             {
                 var item = this.Bind<CMSItem>();
 
-             
-
                 using (var db = DataDocumentStore.DocumentStore.OpenSession())
                 {
-                    Stream data = new MemoryStream(new byte[] { 1, 2, 3 }); // don't forget to load the data from a file or something!
-                    DataDocumentStore.DocumentStore.DatabaseCommands.
-                        PutAttachment("videos/2", null, data,
-                        new RavenJObject { { "Description", "Kids play in the garden" } });
+                     var c = System.Web.HttpContext.Current;
 
-                    db.Store(item);
+                    var data = File.ReadAllBytes(c.Server.MapPath("~/Content/logo.png"));
+
+                    using(var mem = new MemoryStream(data))
+                    {
+                        var metaData = new RavenJObject();
+                        metaData["Format"] = "PNG";
+
+                        DataDocumentStore.DocumentStore.DatabaseCommands.
+                            PutAttachment("videos/2", null, mem,
+                            new RavenJObject { { "Description", "Kids play in the garden" } });
+
+                        db.Store(item);
+                    }
+
+                   
                     db.SaveChanges();
                 }
 
@@ -42,7 +51,8 @@ namespace DaveCMS.Modules
                                        using (var db = DataDocumentStore.DocumentStore.OpenSession())
                                        {
                                            
-                                           var attachment = DataDocumentStore.DocumentStore.DatabaseCommands.GetAttachment("videos/1");
+                                           var attachment = DataDocumentStore.
+                                               DocumentStore.DatabaseCommands.GetAttachment("videos/2");
 
                                            
                                           // Response.AsImage("/");
