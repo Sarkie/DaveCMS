@@ -2,6 +2,8 @@
 using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Diagnostics;
+using Raven.Client;
+using TinyIoC;
 
 namespace DaveCMS
 {
@@ -9,12 +11,13 @@ namespace DaveCMS
     {
         protected override void ApplicationStartup(TinyIoC.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
         {
+            base.ApplicationStartup(container, pipelines);
+
             this.Conventions.ViewLocationConventions.Add((viewName, model, context) =>
             {
                 return string.Concat("Views/", viewName);
             });
 
-            base.ApplicationStartup(container, pipelines);
         }
 
         protected override NancyInternalConfiguration InternalConfiguration
@@ -30,10 +33,10 @@ namespace DaveCMS
             }
         }
 
-//        protected override Type RootPathProvider
-//        {
-//            get { return typeof(CustomRootPathProvider); }
-//        }
+        //        protected override Type RootPathProvider
+        //        {
+        //            get { return typeof(CustomRootPathProvider); }
+        //        }
 
         protected override DiagnosticsConfiguration DiagnosticsConfiguration
         {

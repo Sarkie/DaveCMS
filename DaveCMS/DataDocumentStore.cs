@@ -24,5 +24,12 @@ namespace DaveCMS
             _documentStore.Conventions.IdentityPartsSeparator = "-";
             _documentStore.Initialize();
         }
+
+        public static void Init_For_Testing()
+        {
+            _documentStore = new EmbeddableDocumentStore { RunInMemory = true};
+            _documentStore.Conventions.IdentityPartsSeparator = "-";
+            _documentStore.Initialize();
+        }
     }
 }
