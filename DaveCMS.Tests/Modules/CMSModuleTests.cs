@@ -13,6 +13,7 @@ namespace DaveCMS.Tests.Modules
         {
             DataDocumentStore.Init_For_Testing();
         }
+
         [Fact]
         public void Should_be_able_to_save_a_cms_item()
         {
@@ -34,9 +35,52 @@ namespace DaveCMS.Tests.Modules
 
             // Then
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
 
+        [Fact]
+        public void Should_be_able_to_save_a_cms_item_with_a_published_date()
+        {
+            // Given
 
+            var bootstrapper = new CustomBootstrapper();
+            var browser = new Browser(bootstrapper);
+            var streamReader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Content", "Logo.png"));
+            var multipart = new BrowserContextMultipartFormData(x =>
+                x.AddFile("Logo.png", "Logo.png", "image/png", streamReader.BaseStream));
+            // When
+            var result = browser.Post("/cms/Homepage_Title_Background/20121020/",
+                                      delegate(BrowserContext with)
+                                      {
+                                          with.HttpRequest();
+                                          with.MultiPartFormData(multipart);
 
+                                      });
+
+            // Then
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
+
+        [Fact]
+        public void Should_be_able_to_save_a_cms_item_with_a_published_date_and_time()
+        {
+            // Given
+
+            var bootstrapper = new CustomBootstrapper();
+            var browser = new Browser(bootstrapper);
+            var streamReader = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Content", "Logo.png"));
+            var multipart = new BrowserContextMultipartFormData(x =>
+                x.AddFile("Logo.png", "Logo.png", "image/png", streamReader.BaseStream));
+            // When
+            var result = browser.Post("/cms/Homepage_Title_Background/201210202245/",
+                                      delegate(BrowserContext with)
+                                      {
+                                          with.HttpRequest();
+                                          with.MultiPartFormData(multipart);
+
+                                      });
+
+            // Then
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         }
 
         [Fact]
@@ -66,6 +110,20 @@ namespace DaveCMS.Tests.Modules
 
             // When
             var result = browser.Get("/cms/Homepage_Title_Background/20121020/", with => with.HttpRequest());
+
+            // Then
+            Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        }
+
+        [Fact]
+        public void Should_be_able_to_get_a_cms_item_by_key_up_until_the_date()
+        {
+            // Given
+            var bootstrapper = new CustomBootstrapper();
+            var browser = new Browser(bootstrapper);
+
+            // When
+            var result = browser.Get("/cms/Homepage_Title_Background/20121010/", with => with.HttpRequest());
 
             // Then
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);

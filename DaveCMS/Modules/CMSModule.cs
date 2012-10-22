@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -116,12 +117,7 @@ namespace DaveCMS.Modules
                     if (cmsItem == null)
                         return HttpStatusCode.Gone;
 
-                    var version = cmsItem.Versions.FirstOrDefault(x => 
-                        x.DateCreated.Year== date.Year &&
-                        x.DateCreated.Month == date.Month &&
-                        x.DateCreated.Day == date.Day &&
-                        x.DateCreated.Hour == date.Hour &&
-                        x.DateCreated.Minute == date.Minute);
+                    var version = GetVersion(cmsItem.Versions, date);
 
                     if (version == null)
                         return HttpStatusCode.Gone;
@@ -135,6 +131,57 @@ namespace DaveCMS.Modules
 
                 return HttpStatusCode.Gone;
             };
+        }
+
+        private static Version GetVersion(IList<Version> versions, DateTime date)
+        {
+            var version = versions.FirstOrDefault(x =>
+                       x.DateCreated.Year == date.Year &&
+                       x.DateCreated.Month == date.Month &&
+                       x.DateCreated.Day == date.Day &&
+                       x.DateCreated.Hour == date.Hour &&
+                       x.DateCreated.Minute == date.Minute);
+
+            if(version!=null)
+                return version;
+
+            version = versions.FirstOrDefault(x =>
+                      x.DateCreated.Year == date.Year &&
+                      x.DateCreated.Month == date.Month &&
+                      x.DateCreated.Day == date.Day &&
+                      x.DateCreated.Hour == date.Hour );
+
+            if (version != null)
+                return version;
+
+            version = versions.FirstOrDefault(x =>
+                      x.DateCreated.Year == date.Year &&
+                      x.DateCreated.Month == date.Month &&
+                      x.DateCreated.Day == date.Day );
+
+            if (version != null)
+                return version;
+
+            version = versions.FirstOrDefault(x =>
+                      x.DateCreated.Year == date.Year &&
+                      x.DateCreated.Month == date.Month);
+
+            if (version != null)
+                return version;
+
+            version = versions.FirstOrDefault(x =>
+                      x.DateCreated.Year == date.Year);
+
+            if (version != null)
+                return version;
+
+            version = versions.FirstOrDefault();
+
+            if (version != null)
+                return version;
+
+            return null;
+
         }
     }
 }

@@ -9,16 +9,16 @@ namespace DaveCMS
 {
     public class CustomBootstrapper : DefaultNancyBootstrapper
     {
-        protected override void ApplicationStartup(TinyIoC.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
-        {
-            base.ApplicationStartup(container, pipelines);
-
-            this.Conventions.ViewLocationConventions.Add((viewName, model, context) =>
-            {
-                return string.Concat("Views/", viewName);
-            });
-
-        }
+//        protected override void ApplicationStartup(TinyIoC.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
+//        {
+//            base.ApplicationStartup(container, pipelines);
+//
+//            this.Conventions.ViewLocationConventions.Add((viewName, model, context) =>
+//            {
+//                return string.Concat("Views/", viewName);
+//            });
+//
+//        }
 
         protected override NancyInternalConfiguration InternalConfiguration
         {

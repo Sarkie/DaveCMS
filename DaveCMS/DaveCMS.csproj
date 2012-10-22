@@ -117,6 +117,7 @@
     <Compile Include="Models\CMSDocument.cs" />
     <Compile Include="Modules\CMSModule.cs" />
     <Compile Include="Models\CMSItem.cs" />
+    <Compile Include="Modules\ExampleSiteModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
