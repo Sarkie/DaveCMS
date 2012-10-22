@@ -1,4 +1,5 @@
-/_ReSharper.DaveCMS
+_ReSharper.DaveCMS
+_NCrunch_DaveCMS
 /DaveCMS.suo
 /DaveCMS.6.1.ReSharper.user
 /DaveCMS.ncrunchsolution
@@ -6,3 +7,4 @@
 /DaveCMS.sln.DotSettings.user
 obj
 bin
+App_Data
