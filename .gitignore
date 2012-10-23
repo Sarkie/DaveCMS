@@ -7,4 +7,4 @@ _NCrunch_DaveCMS
 /DaveCMS.sln.DotSettings.user
 obj
 bin
-App_Data
+/DaveCMS/App_Data

@@ -25,10 +25,11 @@ namespace DaveCMS.Tests.Modules
             var multipart = new BrowserContextMultipartFormData(x => 
                 x.AddFile("Logo.png", "Logo.png", "image/png", streamReader.BaseStream));
             // When
-            var result = browser.Post("/cms/Homepage_Title_Background/",
+            var result = browser.Post("/cms/",
                                       delegate(BrowserContext with)
                                       {
                                           with.HttpRequest();
+                                          with.FormValue("key", "Homepage_Title_Background");
                                           with.MultiPartFormData(multipart);
 
                                       });
@@ -48,10 +49,12 @@ namespace DaveCMS.Tests.Modules
             var multipart = new BrowserContextMultipartFormData(x =>
                 x.AddFile("Logo.png", "Logo.png", "image/png", streamReader.BaseStream));
             // When
-            var result = browser.Post("/cms/Homepage_Title_Background/20121020/",
+            var result = browser.Post("/cms/",
                                       delegate(BrowserContext with)
                                       {
                                           with.HttpRequest();
+                                          with.FormValue("key", "Homepage_Title_Background");
+                                          with.FormValue("date", "20121020");
                                           with.MultiPartFormData(multipart);
 
                                       });
@@ -71,10 +74,12 @@ namespace DaveCMS.Tests.Modules
             var multipart = new BrowserContextMultipartFormData(x =>
                 x.AddFile("Logo.png", "Logo.png", "image/png", streamReader.BaseStream));
             // When
-            var result = browser.Post("/cms/Homepage_Title_Background/201210202245/",
+            var result = browser.Post("/cms/",
                                       delegate(BrowserContext with)
                                       {
                                           with.HttpRequest();
+                                          with.FormValue("key", "Homepage_Title_Background");
+                                          with.FormValue("date", "201210202245");
                                           with.MultiPartFormData(multipart);
 
                                       });
@@ -97,6 +102,23 @@ namespace DaveCMS.Tests.Modules
 
             // Then
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+
+
+        }
+
+        [Fact]
+        public void Should_be_able_to_fail_a_get_on_a_random_key()
+        {
+            // Given
+            var bootstrapper = new CustomBootstrapper();
+            var browser = new Browser(bootstrapper);
+
+            // When
+            var result = browser.Get(string.Concat("/cms/" , DateTime.Now.Millisecond, "/"), 
+                with => with.HttpRequest());
+
+            // Then
+            Assert.Equal(HttpStatusCode.Gone, result.StatusCode);
 
 
         }

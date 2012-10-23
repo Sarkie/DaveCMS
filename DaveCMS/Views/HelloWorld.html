@@ -10,24 +10,45 @@
     </head>
     
     <body>
+        
+        <section id="head">
+             <img data-bind="attr:{src: head}" />  
+        </section>
 
-		<section id="main">		
-			<input id="dateSlider" type="range" min="-150" max="365" value="0" step="1" />
-		    <p class="note">Selected Date: <span data-bind="text: selectedDate"></span></p>	
-            <img data-bind="attr:{src: img}" />  
-		</section>
+        <section id="main">		
+            <input id="dateSlider" type="range" min="-150" max="365" value="0" step="1" />
+            <p class="note">Selected Date: <span data-bind="text: selectedDate"></span></p>	
+            <img data-bind="attr:{src: main}" />  
+            
+            <form action="/cms/" method="POST" enctype="multipart/form-data">
+                <input type="text" name="key">
+                <br />
+                <input type="datetime" name="date">
+                 <br />
+                <input type="file" name="file">
+                <br />
+                <input type="submit" />
+            </form>
 
-		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        </section>
+        
+         <section id="footer">
+            <img data-bind="attr:{src: footer}" />  
+        </section>
 
-		<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.1.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+        <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.1.0.js"></script>
 
         <script>
 
             var dateViewModel = {
                 selectedDate: ko.observable(new Date()),
-                img: ko.observable()
+                head: ko.observable(),
+                main: ko.observable(),
+                footer: ko.observable()
             };
-
+            
             ko.applyBindings(dateViewModel);
 
             $(function () {
@@ -39,12 +60,21 @@
                     dateViewModel.selectedDate(todaysDate);
 
                     //201210202245
-                    var img = "/cms/Homepage_Title_Background/" +
-                        todaysDate.getFullYear() +
-                            ('0' + (todaysDate.getMonth() + 1)).slice(-2) +
-                               ('0' + todaysDate.getDate()).slice(-2) + "/";
+                    var dateString = todaysDate.getFullYear() +
+                        ('0' + (todaysDate.getMonth() + 1)).slice(-2) +
+                            ('0' + todaysDate.getDate()).slice(-2);
 
-                    dateViewModel.img(img);
+                    var headImg = "/cms/Homepage_Head/" + dateString + "/";
+
+                    dateViewModel.head(headImg);
+
+                    var mainImg = "/cms/Homepage_Main/" + dateString + "/";
+
+                    dateViewModel.main(mainImg);
+
+                    var footerImg = "/cms/Homepage_Footer/" + dateString + "/";
+
+                    dateViewModel.footer(footerImg);
 
                 });
 

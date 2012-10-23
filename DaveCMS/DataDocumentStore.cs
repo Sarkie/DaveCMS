@@ -18,7 +18,7 @@ namespace DaveCMS
             }
         }
 
-        private static void Init()
+        public static void Init()
         {
             _documentStore = new EmbeddableDocumentStore { ConnectionStringName = "RavenDB" };
             _documentStore.Conventions.IdentityPartsSeparator = "-";
