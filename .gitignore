@@ -8,3 +8,5 @@ _NCrunch_DaveCMS
 obj
 bin
 /DaveCMS/App_Data
+
+/packages
